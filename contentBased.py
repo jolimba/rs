@@ -7,7 +7,7 @@ from sklearn.metrics.pairwise import linear_kernel
 
 def wantedMovie(title):
     tfidf = TfidfVectorizer(stop_words='english')
-    path = 'D:/projetos/fatec/tcc/fast_api/dataset/imdb_top_1000.csv'
+    path = './dataset/imdb_top_1000.csv'
     df = pd.read_csv(path)
     df['Overview'] = df['Overview'].fillna('')
     tfidf_matrix = tfidf.fit_transform(df['Overview'])
@@ -25,5 +25,5 @@ def wantedMovie(title):
 
         movie_indices = [i[0] for i in sim_scores]
 
-        return df['Series_Title'].iloc[movie_indices], df['IMDB_Rating'].iloc[movie_indices]
+        return df['Series_Title'].iloc[movie_indices]
     return get_recommendations(title)

@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 def topMovies():
-    path = 'D:/projetos/fatec/tcc/fast_api/dataset/imdb_top_1000.csv'
+    path = './dataset/imdb_top_1000.csv'
     data = pd.read_csv(path)
     C = data['IMDB_Rating'].mean()
     m = data['No_of_Votes'].quantile(0.9)
@@ -13,4 +13,6 @@ def topMovies():
         return (v/(v+m) * R) + (m/(m+v) * C)
     q_movies['score'] = q_movies.apply(weighted_rating, axis=1)
     q_movies = q_movies.sort_values('score', ascending = False)
-    return q_movies[['Series_Title', 'IMDB_Rating']].head(8).to_json()
+    # return q_movies[['Series_Title', 'IMDB_Rating']].head(8).to_json()
+    # print(q_movies[['Series_Title']].head(8).to_json())
+    return q_movies[['Series_Title']].head(8).to_json()
